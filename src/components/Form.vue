@@ -1,11 +1,11 @@
 <template>
     <div>
         <span> OD1 </span>
-        <input v-model="OD1" type='number' min=0 placeholder="Your first OD">
+        <input v-model="OD1" type='number' min=0 placeholder="Start mass">
         <span> OD2 </span>
-        <input v-model="OD2" type='number' min=0 placeholder="Your second OD">
+        <input v-model="OD2" type='number' min=0 placeholder="End mass">
         <span> period </span>
-        <input v-model="period" type='number' min=0  placeholder="Your time frame">
+        <input v-model="period" type='number' min=0  placeholder="hours/minutes">
         <br>
         <p>Doubling time: {{doublingTime}}</p>
     </div>
@@ -41,7 +41,7 @@ input {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 14pt;
   font-style:inherit;  
-  width: 50pt;
+  width: fit-content;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
