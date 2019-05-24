@@ -35,3 +35,17 @@ export default {
 
 }
 </script>
+
+<style>
+input {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 14pt;
+  font-style:inherit;  
+  width: 50pt;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
