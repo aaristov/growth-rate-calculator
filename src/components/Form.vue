@@ -27,7 +27,8 @@ export default {
   computed : {
       doublingTime() {           
           let growthRate = Math.log(this.OD2 / this.OD1) / this.period
-          return Math.log(2) / growthRate
+          let dTime = Math.log(2) / growthRate
+          return dTime.toPrecision(2)
           
       }
   }
