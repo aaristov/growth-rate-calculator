@@ -17,19 +17,35 @@ export default {
   name: 'Form',
   props: {
   },
-  data() { 
-      return{
+  data() {
+    return{
         OD1: '',   
         OD2: '',
         period: ''
+    }
+
+  },
+  created() {
+      var pathname = window.location.pathname
+      var urlParams = pathname.match(/\d/g)
+      if (urlParams.length == 3){
+              this.OD1 = urlParams[0]
+              this.OD2 = urlParams[1]
+              this.period = urlParams[2]
       }
   },
   computed : {
-      doublingTime() {           
+      doublingTime () {           
           let growthRate = Math.log(this.OD2 / this.OD1) / this.period
           let dTime = Math.log(2) / growthRate
-          return dTime.toPrecision(2)
-          
+          if (dTime > 0 & dTime != Infinity){
+              var paramsUrl = '/' + String(this.OD1) + '&' + String(this.OD2) + '&' + String(this.period)
+              history.replaceState('', 'Growth rate calculator', paramsUrl);
+
+          } else {
+              history.replaceState('', 'Growth rate calculator', '/');
+          }
+          return dTime.toPrecision(2)   
       }
   }
 
