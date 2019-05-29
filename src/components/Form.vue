@@ -24,15 +24,16 @@ export default {
     return{
         OD1: '',   
         OD2: '',
-        period: ''
+        period: '',
+        publicPath: ''
     }
 
   },
   created() {
-    var pathname = window.location.pathname
+    var pathname = window.location.hash
     console.log(pathname)
-    
-    var urlParams = pathname.match(/#\d+(\.*)\d*/g)
+
+    var urlParams = pathname.match(/\d+(\.*)\d*/g)
     console.log(urlParams)
 
     if (!isNull(urlParams)){
@@ -41,6 +42,8 @@ export default {
             this.OD2 = urlParams[1]
             this.period = urlParams[2]
         }
+    } else {
+        this.publicPath = pathname
     }
   },
   computed : {
@@ -48,11 +51,10 @@ export default {
           let growthRate = Math.log(this.OD2 / this.OD1) / this.period
           let dTime = Math.log(2) / growthRate
           if (dTime > 0 & dTime != Infinity){
-              var paramsUrl = '/#' + [this.OD1, this.OD2, this.period].join('&')
-              history.replaceState('', 'Growth rate calculator', paramsUrl);
+              window.location.hash = [this.OD1, this.OD2, this.period].join('_')
 
           } else {
-              history.replaceState('', 'Growth rate calculator', '/');
+              window.location.hash = '?'
           }
           return dTime.toPrecision(2)   
       }
