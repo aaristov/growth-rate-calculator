@@ -27,11 +27,11 @@ export default {
   },
   created() {
       var pathname = window.location.pathname
-      var urlParams = pathname.match(/\d/g)
+      var urlParams = pathname.match(/#\d+(\.*)\d*/g)
       if (urlParams.length == 3){
-              this.OD1 = urlParams[0]
-              this.OD2 = urlParams[1]
-              this.period = urlParams[2]
+        this.OD1 = urlParams[0]
+        this.OD2 = urlParams[1]
+        this.period = urlParams[2]
       }
   },
   computed : {
@@ -39,7 +39,7 @@ export default {
           let growthRate = Math.log(this.OD2 / this.OD1) / this.period
           let dTime = Math.log(2) / growthRate
           if (dTime > 0 & dTime != Infinity){
-              var paramsUrl = '/' + String(this.OD1) + '&' + String(this.OD2) + '&' + String(this.period)
+              var paramsUrl = '/#' + String(this.OD1) + '&' + String(this.OD2) + '&' + String(this.period)
               history.replaceState('', 'Growth rate calculator', paramsUrl);
 
           } else {

@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: './',
+    publicPath: '/growth-rate-calculator/',
     outputDir: 'docs'
   }
