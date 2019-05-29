@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { isNull } from 'util';
 // eslint-disable-no-console
 
 export default {
@@ -28,15 +29,19 @@ export default {
 
   },
   created() {
-      var pathname = window.location.pathname
-      console.log(pathname)
-      var urlParams = pathname.match(/#\d+(\.*)\d*/g)
-      console.log(urlParams)
-      if (urlParams.length == 3){
-        this.OD1 = urlParams[0]
-        this.OD2 = urlParams[1]
-        this.period = urlParams[2]
-      }
+    var pathname = window.location.pathname
+    console.log(pathname)
+    
+    var urlParams = pathname.match(/#\d+(\.*)\d*/g)
+    console.log(urlParams)
+
+    if (!isNull(urlParams)){
+        if (urlParams.length == 3){
+            this.OD1 = urlParams[0]
+            this.OD2 = urlParams[1]
+            this.period = urlParams[2]
+        }
+    }
   },
   computed : {
       doublingTime () {           
