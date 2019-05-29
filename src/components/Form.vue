@@ -30,20 +30,20 @@ export default {
 
   },
   created() {
-    var pathname = window.location.hash
-    console.log(pathname)
+    var hash = window.location.hash
+    console.log(hash)
 
-    var urlParams = pathname.match(/\d+(\.*)\d*/g)
-    console.log(urlParams)
+    var values = hash.match(/\d+(\.*)\d*/g)
+    console.log(values)
 
-    if (!isNull(urlParams)){
-        if (urlParams.length == 3){
-            this.OD1 = urlParams[0]
-            this.OD2 = urlParams[1]
-            this.period = urlParams[2]
+    if (!isNull(values)){
+        if (values.length == 3){
+            this.OD1 = values[0]
+            this.OD2 = values[1]
+            this.period = values[2]
         }
     } else {
-        this.publicPath = pathname
+        window.location.hash = '?'
     }
   },
   computed : {
