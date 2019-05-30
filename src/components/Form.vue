@@ -7,6 +7,14 @@
         <span> period </span>
         <input v-model="period" type='number' min=0  placeholder="hours/minutes">
         <br>
+        <ul class="err">
+            <li v-if="errors.negative.active">
+                {{ errors.negative.text }} 
+            </li>  
+            <li v-if="errors.invert.active">
+                {{ errors.invert.text }} 
+            </li>   
+        </ul> 
         <p>Doubling time: {{doublingTime}}</p>
     </div>
 
@@ -14,6 +22,7 @@
 
 <script>
 import { isNull } from 'util';
+import { exists } from 'fs';
 // eslint-disable-no-console
 
 export default {
@@ -25,7 +34,16 @@ export default {
         OD1: '',   
         OD2: '',
         period: '',
-        publicPath: ''
+        errors: {
+            negative: {
+                text: 'Be positive!', 
+                active: false
+            },
+            invert: {
+                text: 'OD2 should be greated than OD1!', 
+                active: false
+            }
+        }
     }
 
   },
@@ -47,7 +65,22 @@ export default {
     }
   },
   computed : {
-      doublingTime () {           
+      doublingTime () { 
+
+          if (this.OD1 <= 0 || this.OD2 <= 0 || this.period <= 0 ){
+              this.errors.negative.active = true
+          } else {
+              this.errors.negative.active = false
+          }
+
+          if (this.OD2 <= this.OD1){
+              this.errors.invert.active = true
+          } else {
+              this.errors.invert.active = false
+          }
+
+        
+
           let growthRate = Math.log(this.OD2 / this.OD1) / this.period
           let dTime = Math.log(2) / growthRate
           if (dTime > 0 & dTime != Infinity){
@@ -75,4 +108,8 @@ input {
   color: #2c3e50;
   margin-top: 60px;
 }
+.err {
+    color: #ff0000;
+    text-align: left;}
+
 </style>
