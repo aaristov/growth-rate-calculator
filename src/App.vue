@@ -2,16 +2,19 @@
   <div id="app">
     <img width=50% alt="Cartoon logo" src="./assets/dividing-amoeba.jpg">
     <Form/>
+    <History :history="$children[0].history"></History>
   </div>
 </template>
 
 <script>
 import Form from './components/Form.vue'
+import History from './components/History.vue'
 
 export default {
   name: 'app',
   components: {
-    Form
+    Form,
+    History
   }
 }
 </script>

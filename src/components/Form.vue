@@ -15,7 +15,9 @@
                 {{ errors.invert.text }} 
             </li>   
         </ul> 
-        <p>Doubling time: {{doublingTime}}</p>
+        <p>Doubling time: {{doublingTime}} <button v-if='valid' v-on:click="remember"> Remember </button></p>
+        
+        
     </div>
 
 </template>
@@ -24,7 +26,7 @@
 import { isNull } from 'util';
 import { exists } from 'fs';
 // eslint-disable-no-console
-
+var histId = 1
 export default {
   name: 'Form',
   props: {
@@ -34,18 +36,27 @@ export default {
         OD1: '',   
         OD2: '',
         period: '',
+        valid: false,
+        history: [],
         errors: {
             negative: {
                 text: 'Be positive!', 
                 active: false
             },
             invert: {
-                text: 'OD2 should be greated than OD1!', 
+                text: 'OD2 should be greater than OD1!', 
                 active: false
             }
         }
     }
 
+  },
+  methods: {
+      remember () {
+          this.history.push({id: histId++, OD1: this.OD1, OD2: this.OD2, period: this.period, doublingTime: this.doublingTime})
+          this.OD1 = this.OD2
+          this.OD2 = ''
+      }
   },
   created() {
     var hash = window.location.hash
@@ -85,9 +96,10 @@ export default {
           let dTime = Math.log(2) / growthRate
           if (dTime > 0 & dTime != Infinity){
               window.location.hash = [this.OD1, this.OD2, this.period].join('_')
-
+              this.valid = true  
           } else {
               window.location.hash = '?'
+              this.valid = false
           }
           return dTime.toPrecision(2)   
       }
