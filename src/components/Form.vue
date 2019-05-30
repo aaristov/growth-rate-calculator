@@ -53,9 +53,9 @@ export default {
   },
   methods: {
       remember () {
-          this.history.push({id: histId++, OD1: this.OD1, OD2: this.OD2, period: this.period, doublingTime: this.doublingTime})
+          this.$store.commit('pushHistory', {id: histId++, OD1: this.OD1, OD2: this.OD2, period: this.period, doublingTime: this.doublingTime})
           this.OD1 = this.OD2
-          this.OD2 = ''
+        //   this.OD2 = ''
       }
   },
   created() {

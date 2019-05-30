@@ -2,7 +2,7 @@
   <div id="app">
     <img width=50% alt="Cartoon logo" src="./assets/dividing-amoeba.jpg">
     <Form/>
-    <History :history="$children[0].history"></History>
+    <History :history="$store.state.history"></History>
   </div>
 </template>
 
