@@ -10,7 +10,7 @@
                     <td>Period</td>
                     <td>Doubling time</td>
                 </tr>
-                <tr v-for="item in history" v-bind:key="item.id" >
+                <tr v-for="item in $store.state.history" v-bind:key="item.id" >
                     <td>{{item.id}}</td>
                     <td>{{item.OD1}}</td>
                     <td>{{item.OD2}}</td>
@@ -29,7 +29,6 @@
 export default {
     name: 'History',
     props: [
-        'history'
     ]
 
 }
